@@ -24,6 +24,4 @@ public class DemoServerThreads extends Thread{
         player1.send("Exit");
         player2.send("Exit");
     }
-
-
 }
