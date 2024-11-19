@@ -6,13 +6,16 @@ import java.net.Socket;
 
 public class DemoClient {
 
-    private static final int PORT = 245;
+    private static final int PORT = 24500;
     Socket socket;
     private BufferedReader in;
     private PrintWriter out;
 
     public DemoClient(String serverAddress) throws IOException {
+        System.out.println(serverAddress);
+        System.out.println(PORT);
         socket = new Socket(serverAddress, PORT);
+
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -34,9 +37,18 @@ public class DemoClient {
     private void play() throws IOException {
 
         String response;
+
+
+
         response = in.readLine();
 
         System.out.println(response);
+
+        if (response.equals("Exit")) {
+
+            socket.close();
+            System.exit(0);
+        }
 
         out.println("Hello from client");
 
